@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.webmanifest">
+    <title>iOS 14</title>
+</head>
+<body>
+    <div id="homescreen">
+        <div id="pages">
+            <div class="standard-page">
+                <div class="app-emplacement"><img src="./assets/apps/youtube.png" alt="" class="app"></div>
+                <div class="app-emplacement"><img src="./assets/apps/soundcloud.png" alt="" class="app"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement">
+                    <img src="./assets/apps/soundcloud.png" alt="" class="app">
+                    <div class="app-name">Soundcloud</div>
+                </div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+            </div>
+            <div class="standard-page">
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+                <div class="app-emplacement"></div>
+            </div>
+        </div>
+        <div id="pages-position">
+            <div id="points">
+                <div class="point actual" onclick="scrollToPage(1);"></div>
+                <div class="point" onclick="scrollToPage(2);"></div>
+            </div>
+        </div>
+        <div id="dock">
+            <div class="app-emplacement">
+                <img src="./assets/apps/photos.png" alt="" class="app">
+            </div>
+            <div class="app-emplacement">
+                <img src="./assets/apps/safari.png" alt="" class="app">
+            </div>
+            <div class="app-emplacement">
+                <img src="./assets/apps/camera.png" alt="" class="app">
+            </div>
+            <div class="app-emplacement">
+                <img src="./assets/apps/settings.png" alt="" class="app">
+            </div>
+        </div>
+    </div>
+    <script>
+        const pages = document.querySelector('#pages');
+        const points = document.querySelector('#points');
+
+        points.addEventListener('click', () => {
+            points.classList.add('active');
+        });
+
+        points.addEventListener('transitionend', () => {
+            points.classList.remove('active');
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            const comingPage = entries.find(e => e.isIntersecting);
+            const positionNumber = Array.from(pages.children).indexOf(comingPage.target) + 1;
+            console.log(entries);
+            points.querySelector('.actual').classList.remove('actual');
+            points.querySelector(`:nth-child(${positionNumber})`).classList.add('actual');
+        }, { root: pages, threshold: 0.5 });
+
+        Array.from(pages.children).forEach(page => {
+            console.log(page);
+            observer.observe(page);
+        });
+
+        function scrollToPage(number) {
+            console.log('hey !');
+            pages.children.item(number - 1).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
