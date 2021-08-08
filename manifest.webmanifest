@@ -1,6 +1,16 @@
 {
-    "name": "iOS 14",
+    "name": "iOS 14 - html",
     "short_name": "iOS",
-    "description": "test",
-    "display": "fullscreen"
+    "description": "Une maquette d'iOS réalisée en html, css et js vanilla",
+    "icons": [
+        {
+            "src": "assets/logo.png",
+            "sizes": "460x460",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/index.html",
+    "display": "fullscreen",
+    "theme_color": "#B12A34",
+    "background_color": "#B12A34"
 }
